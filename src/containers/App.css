@@ -2,10 +2,13 @@
   text-align: center;
 }
 
-
 .App-header {
-  background-color: #222;
-  height: 150px;
+
+  background-image: url("https://www.allaboutcircuits.com/uploads/thumbnails/Electricity.png");
+  background-repeat: no-repeat;
+  background-size: cover;
+  width: auto;
+  height: 120px;
   padding: 20px;
   color: white;
 }

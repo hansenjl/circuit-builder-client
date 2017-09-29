@@ -1,10 +1,10 @@
 import { createStore, applyMiddleware, combineReducers} from 'redux';
 import thunk from 'redux-thunk';
-import problemsReducer from './reducers/problemsReducer';
-
+import problems from './reducers/problemsReducer';
+import problemFormData from './reducers/problemFormData';
 
 const reducers = combineReducers({
-  problems: problemsReducer
+  problems, problemFormData
 })
 
 const middleware = [thunk]

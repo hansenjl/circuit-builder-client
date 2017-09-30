@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { updateProblemFormData } from '../actions/problemForm';
+import { createProblem } from '../actions/problems';
 
 class ProblemForm extends Component {
 
@@ -12,13 +13,18 @@ class ProblemForm extends Component {
     this.props.updateProblemFormData(currentProblemFormData)
   }
 
+  handleOnSubmit = event => {
+    event.preventDefault()
+    this.props.createProblem(this.props.problemFormData)
+  }
+
   render() {
     const { difficulty, category, tot_voltage, tot_resistance } = this.props.problemFormData;
 
 
     return(
       <div>
-        <form>
+        <form onSubmit={this.handleOnSubmit} >
           <div>
             <select name="category" value={category} onChange={this.handleOnChange}>
               <option value="series">Series</option>
@@ -51,7 +57,7 @@ class ProblemForm extends Component {
               value={tot_resistance}/>
           </div>
           <div>
-            <label>Current: {(tot_voltage / tot_resistance).toFixed(2)}</label>
+            <label id="tot_current">Current: {(tot_voltage / tot_resistance).toFixed(2)}</label>
           </div>
           <input type="submit" value="Save"/>
         </form>
@@ -66,4 +72,4 @@ const mapStateToProps = state => {
   }
 }
 
-export default connect(mapStateToProps, {updateProblemFormData})(ProblemForm);
+export default connect(mapStateToProps, {updateProblemFormData, createProblem})(ProblemForm);

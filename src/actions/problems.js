@@ -9,6 +9,13 @@ const setProblems = problems => {
   }
 }
 
+const addProblem = problem => {
+  return {
+    type: 'CREATE_PROBLEM_SUCCESS',
+    problem
+  }
+}
+
 // ** Async Actions **
 export const getProblems = () => {
   return dispatch => {
@@ -19,5 +26,20 @@ export const getProblems = () => {
   }
 }
 
+
+export const createProblem = (problem) => {
+  return dispatch => {
+    return fetch(`${API_URL}/problems`, {
+      method: "POST",
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({problem: problem})
+    })
+      .then(response => response.json())
+      .then(problem => dispatch(addProblem(problem)))
+      .catch(error => console.log(error))
+  }
+}
 
 

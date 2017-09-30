@@ -22,7 +22,9 @@ export default (state={
 
   switch(action.type){
     case 'UPDATED_DATA':
-      return action.problemFormData
+      const current = action.problemFormData.tot_voltage / action.problemFormData.tot_resistance
+      return Object.assign({},action.problemFormData,{tot_current: current}
+        )
     default:
       return state
   }

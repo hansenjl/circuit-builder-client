@@ -16,6 +16,7 @@ class ProblemForm extends Component {
   handleOnSubmit = event => {
     event.preventDefault()
     this.props.createProblem(this.props.problemFormData)
+      .then(this.props.resetProblemForm)
   }
 
   render() {

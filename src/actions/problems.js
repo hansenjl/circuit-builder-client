@@ -1,3 +1,5 @@
+import {resetProblemForm} from './problemForm';
+
 const API_URL = process.env.REACT_APP_API_URL;
 
 // ** Action Creators **
@@ -37,7 +39,10 @@ export const createProblem = (problem) => {
       body: JSON.stringify({problem: problem})
     })
       .then(response => response.json())
-      .then(problem => dispatch(addProblem(problem)))
+      .then(problem => {
+        dispatch(addProblem(problem))
+        dispatch(resetProblemForm())
+      })
       .catch(error => console.log(error))
   }
 }

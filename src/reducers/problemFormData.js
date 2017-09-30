@@ -1,4 +1,4 @@
-export default (state={
+const initialState = {
   difficulty: 0,
   category: "series",
   tot_voltage: 1,
@@ -18,13 +18,19 @@ export default (state={
       ]
     }
   ]
-}, action) => {
+}
+
+export default (state=initialState, action) => {
 
   switch(action.type){
     case 'UPDATED_DATA':
       const current = action.problemFormData.tot_voltage / action.problemFormData.tot_resistance
-      return Object.assign({},action.problemFormData,{tot_current: current}
-        )
+      return Object.assign({},action.problemFormData,{tot_current: current
+      })
+
+    case 'RESET_PROBLEM_FORM':
+      return initialState
+
     default:
       return state
   }

@@ -5,3 +5,9 @@ export const updateProblemFormData  = problemFormData => {
     problemFormData
   }
 }
+
+export const resetProblemForm = () => {
+  return {
+    type: 'RESET_PROBLEM_FORM'
+  }
+}

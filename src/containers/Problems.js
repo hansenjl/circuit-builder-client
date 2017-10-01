@@ -3,7 +3,6 @@ import { connect } from 'react-redux';
 import './Problems.css';
 import { getProblems } from '../actions/problems';
 import Problem from '../components/Problem';
-import ProblemForm from './ProblemForm';
 
 class Problems extends Component {
 
@@ -20,7 +19,6 @@ class Problems extends Component {
               <Problem problem={problem} key={problem.id}/>
             )}
         </div>
-        <ProblemForm />
       </div>
     )
   }

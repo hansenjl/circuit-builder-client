@@ -16,6 +16,7 @@ class ProblemForm extends Component {
   }
 
   handleNestedChange = event => {
+
     const nestedProblemFormData = Object.assign({}, this.props.problemFormData, {
       loops: [{
         resistors:[
@@ -23,7 +24,14 @@ class ProblemForm extends Component {
         ]
       }]
     })
-    this.props.updateProblemFormData(nestedProblemFormData)
+
+    let calculatedResistance = parseInt(nestedProblemFormData.loops[0].resistors.reduce((tot,resistor)=>{return tot += resistor.resistance},0),10)
+
+    const finalFormData = Object.assign({},nestedProblemFormData,{
+        tot_resistance: calculatedResistance
+    } )
+
+    this.props.updateProblemFormData(finalFormData)
   }
 
   handleOnSubmit = event => {
@@ -86,12 +94,7 @@ class ProblemForm extends Component {
                 {(tot_voltage / tot_resistance).toFixed(2)}
               </td>
               <td>
-                <input
-                type="number"
-                name="tot_resistance"
-                onChange={this.handleOnChange}
-                value={tot_resistance}
-                min="0"/>
+                {tot_resistance}
               </td>
             </tr>
             <tr>
@@ -101,7 +104,7 @@ class ProblemForm extends Component {
               <td>
                 <input
                 type="number"
-                name="resistance"
+                name="R1"
                 onChange={this.handleNestedChange}
                 value={loops[0].resistors[0].resistance}
                 min="0"/>

@@ -28,7 +28,6 @@ class ProblemForm extends Component {
         ]
       }]
     })
-
     this.props.updateProblemFormData(nestedProblemFormData)
   }
 
@@ -111,8 +110,8 @@ class ProblemForm extends Component {
             {loops[0].resistors.map((resistor, idx) =>
               <tr key={idx}>
                 <td>Resistor {idx + 1}</td>
-                <td></td>
-                <td></td>
+                <td>{resistor.voltage}</td>
+                <td>{resistor.current}</td>
                 <td>
                   <input
                   type="number"

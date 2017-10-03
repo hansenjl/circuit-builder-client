@@ -24,12 +24,24 @@ export default (state=initialState, action) => {
 
   switch(action.type){
     case 'UPDATED_DATA':
-      const totCurrent = action.problemFormData.tot_voltage / action.problemFormData.tot_resistance
+
       const totResistance = action.problemFormData.loops[0].resistors.reduce((tot,resistor)=>{return tot += parseInt(resistor.resistance,10)},0)
 
+      const totCurrent = (action.problemFormData.tot_voltage / totResistance).toFixed(2)
 
-      return Object.assign({},action.problemFormData,{tot_current: totCurrent,
-        tot_resistance: totResistance
+      let resistorArray = action.problemFormData.loops[0].resistors
+
+      for (var i = 0; i < resistorArray.length; i++) {
+        resistorArray[i].current = totCurrent
+        resistorArray[i].voltage = (totCurrent * resistorArray[i].resistance).toFixed(2)
+      }
+
+      return Object.assign({},action.problemFormData,{
+        tot_current: totCurrent,
+        tot_resistance: totResistance,
+        loops: [{
+          resistors: resistorArray
+        }]
       })
 
     case 'RESET_PROBLEM_FORM':

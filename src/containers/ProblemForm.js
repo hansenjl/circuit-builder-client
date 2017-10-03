@@ -4,7 +4,6 @@ import { updateProblemFormData } from '../actions/problemForm';
 import { createProblem } from '../actions/problems';
 
 
-//This
 class ProblemForm extends Component {
 
   handleOnChange = event => {
@@ -16,16 +15,19 @@ class ProblemForm extends Component {
   }
 
   handleNestedChange = event => {
-
-    const nestedProblemFormData = Object.assign({}, this.props.problemFormData, {
+    const idx = parseInt(event.target.name,10) - 1
+    const nestedProblemFormData = Object.assign({},this.props.problemFormData,{
       loops: [{
         resistors:[
-          {resistance: event.target.value}
+          ...this.props.problemFormData.loops[0].resistors.slice(0,idx),
+          {
+            ...this.props.problemFormData.loops[0].resistors[idx],
+            resistance: parseInt(event.target.value,10)
+          },
+          ...this.props.problemFormData.loops[0].resistors.slice(idx+1)
         ]
       }]
     })
-
-    // let calculatedResistance = parseInt(nestedProblemFormData.loops[0].resistors.reduce((tot,resistor)=>{return tot += resistor.resistance},0),10)
 
     this.props.updateProblemFormData(nestedProblemFormData)
   }
@@ -114,7 +116,7 @@ class ProblemForm extends Component {
                 <td>
                   <input
                   type="number"
-                  name="R{idx + 1}"
+                  name={idx + 1}
                   onChange={this.handleNestedChange}
                   value={resistor.resistance}
                   min="0"/>

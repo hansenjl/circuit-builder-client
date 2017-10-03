@@ -3,6 +3,8 @@ import { connect } from 'react-redux';
 import { updateProblemFormData } from '../actions/problemForm';
 import { createProblem } from '../actions/problems';
 
+
+//This
 class ProblemForm extends Component {
 
   handleOnChange = event => {
@@ -41,21 +43,24 @@ class ProblemForm extends Component {
     return(
       <div className="FormContainer">
         <form onSubmit={this.handleOnSubmit} >
-         <div>
+          <span>
+            <label> Circuit Type: </label>
             <select name="category" value={category} onChange={this.handleOnChange}>
               <option value="series">Series</option>
               <option value="parallel">Parallel</option>
               <option value="combo">Combo</option>
             </select>
-          </div>
-          <div>
-              <label>Difficulty:</label>
+          </span>
+          <span>
+              <label> Difficulty: </label>
               <input
                 type="number"
                 name="difficulty"
                 onChange={this.handleOnChange}
-                value={difficulty}/>
-            </div>
+                value={difficulty}
+                min="0"
+                max="5"/>
+          </span>
           <table>
             <thead>
             <tr>
@@ -73,7 +78,9 @@ class ProblemForm extends Component {
                   type="number"
                   name="tot_voltage"
                   onChange={this.handleOnChange}
-                  value={tot_voltage}/>
+                  value={tot_voltage}
+                  min="0"
+                  />
               </td>
               <td>
                 {(tot_voltage / tot_resistance).toFixed(2)}
@@ -83,7 +90,8 @@ class ProblemForm extends Component {
                 type="number"
                 name="tot_resistance"
                 onChange={this.handleOnChange}
-                value={tot_resistance}/>
+                value={tot_resistance}
+                min="0"/>
               </td>
             </tr>
             <tr>
@@ -95,7 +103,8 @@ class ProblemForm extends Component {
                 type="number"
                 name="resistance"
                 onChange={this.handleNestedChange}
-                value={loops[0].resistors[0].resistance}/>
+                value={loops[0].resistors[0].resistance}
+                min="0"/>
               </td>
             </tr>
             </tbody>

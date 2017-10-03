@@ -25,13 +25,9 @@ class ProblemForm extends Component {
       }]
     })
 
-    let calculatedResistance = parseInt(nestedProblemFormData.loops[0].resistors.reduce((tot,resistor)=>{return tot += resistor.resistance},0),10)
+    // let calculatedResistance = parseInt(nestedProblemFormData.loops[0].resistors.reduce((tot,resistor)=>{return tot += resistor.resistance},0),10)
 
-    const finalFormData = Object.assign({},nestedProblemFormData,{
-        tot_resistance: calculatedResistance
-    } )
-
-    this.props.updateProblemFormData(finalFormData)
+    this.props.updateProblemFormData(nestedProblemFormData)
   }
 
   handleOnSubmit = event => {
@@ -42,11 +38,24 @@ class ProblemForm extends Component {
 
   handleAddResistor = event => {
     //add another row to the table form for the second resistor
+    event.preventDefault()
+    const newResistorData = Object.assign({},this.props.problemFormData, {
+      loops: [{
+        resistors:[
+          ...this.props.problemFormData.loops[0].resistors,
+          {voltage: 1,
+          resistance: 1,
+          current: 1}
+        ]
+      }]
+    })
+
+    this.props.updateProblemFormData(newResistorData )
+
   }
 
   render() {
     const { difficulty, category, tot_voltage, tot_resistance, loops } = this.props.problemFormData;
-
 
     return(
       <div className="FormContainer">
@@ -97,19 +106,21 @@ class ProblemForm extends Component {
                 {tot_resistance}
               </td>
             </tr>
-            <tr>
-              <td>Resistor 1</td>
-              <td></td>
-              <td></td>
-              <td>
-                <input
-                type="number"
-                name="R1"
-                onChange={this.handleNestedChange}
-                value={loops[0].resistors[0].resistance}
-                min="0"/>
-              </td>
-            </tr>
+            {loops[0].resistors.map((resistor, idx) =>
+              <tr key={idx}>
+                <td>Resistor {idx + 1}</td>
+                <td></td>
+                <td></td>
+                <td>
+                  <input
+                  type="number"
+                  name="R{idx + 1}"
+                  onChange={this.handleNestedChange}
+                  value={resistor.resistance}
+                  min="0"/>
+                </td>
+              </tr>
+            )}
             </tbody>
           </table>
           <button onClick={this.handleAddResistor}>Add a Resistor</button>

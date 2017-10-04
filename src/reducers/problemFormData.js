@@ -49,8 +49,6 @@ export default (state=initialState, action) => {
 
       const totParallelResistance = 1/inverseResistance
 
-      const totParallelCurrent = (action.problemFormData.tot_voltage / totParallelResistance).toFixed(2)
-
       let parallelResistorArray = action.problemFormData.loops[0].resistors
 
       for (var j = 0; j < parallelResistorArray.length; j++) {
@@ -58,9 +56,11 @@ export default (state=initialState, action) => {
         parallelResistorArray[j].voltage = action.problemFormData.tot_voltage
       }
 
+      const totParallelCurrent = parallelResistorArray.reduce((tot,resistor)=>{return tot += parseInt(resistor.current,10)},0)
+
       return Object.assign({},action.problemFormData,{
-        tot_current: totParallelCurrent ,
-        tot_resistance: totParallelResistance ,
+        tot_current: totParallelCurrent.toFixed(2) ,
+        tot_resistance: totParallelResistance.toFixed(2) ,
         loops: [{
           resistors: parallelResistorArray
         }]

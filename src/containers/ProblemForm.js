@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import { updateProblemFormData } from '../actions/problemForm';
 import { createProblem } from '../actions/problems';
 import  SeriesCircuit from '../components/SeriesCircuit';
+import ParallelCircuit from '../components/ParallelCircuit';
 
 
 class ProblemForm extends Component {
@@ -54,7 +55,6 @@ class ProblemForm extends Component {
     })
 
     this.props.updateProblemFormData(newResistorData )
-
   }
 
   render() {
@@ -130,7 +130,7 @@ class ProblemForm extends Component {
           <input type="submit" value="Save"/>
         </form>
         <div className="CircuitContainer">
-          < SeriesCircuit circuitData={this.props.problemFormData} />
+          {this.props.problemFormData.category === "series" ? < SeriesCircuit circuitData={this.props.problemFormData} /> : < ParallelCircuit circuitData={this.props.problemFormData} />}
         </div>
       </div>
     )

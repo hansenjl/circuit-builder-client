@@ -54,12 +54,16 @@ button, input[type=submit], input[type=reset] {
   width: 100px;
   height: 100px;
   background-size: cover;
-
 }
 
 .Resistor{
   background-image: url("./resistor.png");
 }
+
+.Junction{
+  background-image: url("./junction.png");
+}
+
 
 .LCorner{
   background-image: url("./corner.png");
@@ -92,6 +96,15 @@ button, input[type=submit], input[type=reset] {
 .MiddleRow > :first-child{
   -webkit-transform: rotate(270deg);
   transform: rotate(270deg);
+}
+
+.Loop > :first-child{
+  -webkit-transform: rotate(180deg);
+  transform: rotate(180deg);
+}
+
+.Loop {
+  clear:both;
 }
 
 .MiddleRow > div {

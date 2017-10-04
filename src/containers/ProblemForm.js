@@ -76,7 +76,7 @@ class ProblemForm extends Component {
                 name="difficulty"
                 onChange={this.handleOnChange}
                 value={difficulty}
-                min="0"
+                min="1"
                 max="5"/>
           </span>
           <table>
@@ -127,6 +127,18 @@ class ProblemForm extends Component {
           <button onClick={this.handleAddResistor}>Add a Resistor</button>
           <input type="submit" value="Save"/>
         </form>
+        <div className="CircuitContainer">
+          <div className="TopRow">
+            <div className="Circuit Top LCorner"></div>
+            <div className="Circuit Battery">{tot_voltage} V</div>
+            <div className="Circuit Top RCorner"></div>
+          </div>
+          <div className="BottomRow">
+            <div className="Circuit LCorner"></div>
+            <div className="Circuit Resistor">5 Ohms</div>
+            <div className="Circuit RCorner"></div>
+          </div>
+        </div>
       </div>
     )
   }

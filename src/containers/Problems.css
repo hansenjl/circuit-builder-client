@@ -32,6 +32,45 @@ button, input[type=submit], input[type=reset] {
     cursor: pointer;
 }
 
+.CircuitContainer{
+  width: 700px ;
+  margin-left: auto ;
+  margin-right: auto ;
+}
+
+.Circuit{
+  float:left;
+  width: 100px;
+  height: 100px;
+  background-size: cover;
+}
+
+.Resistor{
+  background-image: url("./resistor.png");
+}
+
+.LCorner{
+  background-image: url("./lCorner.png");
+  clear:both;
+}
+
+.RCorner{
+  background-image: url("./rCorner.png");
+}
+
+.Battery{
+  background-image: url("./battery.png");
+}
+
+.Top{
+  -moz-transform: scaleY(-1);
+  -o-transform: scaleY(-1);
+  -webkit-transform: scaleY(-1);
+  transform: scaleY(-1);
+  filter: FlipV;
+  -ms-filter: “FlipV”;
+}
+
 
 .FormContainer{
   padding: 24px;

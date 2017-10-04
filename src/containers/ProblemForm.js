@@ -15,6 +15,7 @@ class ProblemForm extends Component {
     this.props.updateProblemFormData(currentProblemFormData)
   }
 
+
   handleNestedChange = event => {
     const idx = parseInt(event.target.name,10) - 1
     const nestedProblemFormData = Object.assign({},this.props.problemFormData,{

@@ -1,10 +1,24 @@
 //** Action Creators **
 export const updateProblemFormData  = problemFormData => {
-  return {
-    type: 'UPDATED_DATA',
-    problemFormData
+  switch (problemFormData.category){
+    case 'combo':
+      return {
+        type: 'combo',
+        problemFormData
+      }
+    case 'parallel':
+      return {
+        type: 'UPDATED_PARALLEL_DATA',
+        problemFormData
+      }
+    default:
+      return {
+        type: 'UPDATED_SERIES_DATA',
+        problemFormData
+      }
   }
 }
+
 
 export const resetProblemForm = () => {
   return {

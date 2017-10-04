@@ -1,5 +1,5 @@
 const initialState = {
-  difficulty: 0,
+  difficulty: 1,
   category: "series",
   tot_voltage: 1,
   tot_resistance: 1,

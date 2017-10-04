@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { updateProblemFormData } from '../actions/problemForm';
 import { createProblem } from '../actions/problems';
+import  SeriesCircuit from '../components/SeriesCircuit';
 
 
 class ProblemForm extends Component {
@@ -128,16 +129,7 @@ class ProblemForm extends Component {
           <input type="submit" value="Save"/>
         </form>
         <div className="CircuitContainer">
-          <div className="TopRow">
-            <div className="Circuit Top LCorner"></div>
-            <div className="Circuit Battery">{tot_voltage} V</div>
-            <div className="Circuit Top RCorner"></div>
-          </div>
-          <div className="BottomRow">
-            <div className="Circuit LCorner"></div>
-            <div className="Circuit Resistor">5 Ohms</div>
-            <div className="Circuit RCorner"></div>
-          </div>
+          < SeriesCircuit circuitData={this.props.problemFormData} />
         </div>
       </div>
     )

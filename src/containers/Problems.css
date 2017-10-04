@@ -32,17 +32,29 @@ button, input[type=submit], input[type=reset] {
     cursor: pointer;
 }
 
+.FormContainer{
+  padding: 24px;
+}
+
+
+
 .CircuitContainer{
   width: 700px ;
   margin-left: auto ;
   margin-right: auto ;
 }
 
+.Wire{
+  background-image: url("./wire.png");
+}
+
+
 .Circuit{
   float:left;
   width: 100px;
   height: 100px;
   background-size: cover;
+
 }
 
 .Resistor{
@@ -50,16 +62,41 @@ button, input[type=submit], input[type=reset] {
 }
 
 .LCorner{
-  background-image: url("./lCorner.png");
-  clear:both;
+  background-image: url("./corner.png");
 }
 
 .RCorner{
-  background-image: url("./rCorner.png");
+  background-image: url("./corner.png");
+  -webkit-transform: rotate(270deg);
+  transform: rotate(270deg);
+}
+
+.TopRCorner{
+  background-image: url("./corner.png");
+  -webkit-transform: rotate(180deg);
+  transform: rotate(180deg);
 }
 
 .Battery{
   background-image: url("./battery.png");
+}
+
+.BottomRow{
+   clear:both;
+}
+
+.MiddleRow{
+   clear:both;
+}
+
+.MiddleRow > :first-child{
+  -webkit-transform: rotate(270deg);
+  transform: rotate(270deg);
+}
+
+.MiddleRow > div {
+  -webkit-transform: rotate(90deg);
+  transform: rotate(90deg);
 }
 
 .Top{
@@ -72,6 +109,3 @@ button, input[type=submit], input[type=reset] {
 }
 
 
-.FormContainer{
-  padding: 24px;
-}

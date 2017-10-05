@@ -7,8 +7,6 @@ import registerServiceWorker from './registerServiceWorker';
 import store from './store';
 
 
-
-
 ReactDOM.render(
   <Provider store={store}>
       <App />
@@ -17,16 +15,3 @@ ReactDOM.render(
 );
 registerServiceWorker();
 
-// var store = {
-//   problems: [
-//     {...}
-//   ],
-//   problemFormData: [
-//     {
-//       tot_voltage:
-//       tot_current:
-//       tot_resistance:
-
-//     }
-//   ]
-// }

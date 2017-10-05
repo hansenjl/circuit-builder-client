@@ -6,6 +6,9 @@ export default (state = [], action) => {
     case 'CREATE_PROBLEM_SUCCESS':
       return state.concat(action.problem);
 
+    case 'GET_PROBLEM_SUCCESS':
+      return action.problem;
+
     default:
       return state;
   }

@@ -16,7 +16,12 @@ class Problems extends Component {
         <div className="ProblemsContainer">
           <h3>Choose from existing problems:</h3>
             {this.props.problems.map(problem =>
-              <Problem problem={problem} key={problem.id}/>
+              <div onClick={this.handleClick} key={problem.id}>
+                <Problem
+                  problem={problem}
+                  key={problem.id}
+                  />
+              </div>
             )}
         </div>
       </div>

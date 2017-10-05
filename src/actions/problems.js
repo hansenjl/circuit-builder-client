@@ -19,7 +19,6 @@ const setProblem = problem => {
 }
 
 const addProblem = problem => {
-  debugger
   return {
     type: 'CREATE_PROBLEM_SUCCESS',
     problem
@@ -47,6 +46,10 @@ export const getProblem = (id) => {
 
 
 export const createProblem = (problem) => {
+  problem["loops_attributes"] = problem["loops"]
+  delete problem["loops"];
+  problem["loops_attributes"][0]["resistors_attributes"] = problem["loops_attributes"][0]["resistors"]
+  delete problem["loops_attributes"][0]["resistors"]
   return dispatch => {
     return fetch(`${API_URL}/problems`, {
       method: "POST",

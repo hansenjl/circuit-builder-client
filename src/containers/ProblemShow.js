@@ -6,11 +6,8 @@ import ParallelCircuit from '../components/ParallelCircuit';
 class ProblemShow extends Component {
 
   // componentDidMount(){
-  //   this.props.getProblem(this.props.problemId)
+  //   this.props.getProblem(this.props.c)
   // }
-  componentDidMount(){
-    this.props.getProblem(this.props.params.id)
-    }
 
   render(){
 

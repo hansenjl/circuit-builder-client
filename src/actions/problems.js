@@ -19,6 +19,7 @@ const setProblem = problem => {
 }
 
 const addProblem = problem => {
+  debugger
   return {
     type: 'CREATE_PROBLEM_SUCCESS',
     problem

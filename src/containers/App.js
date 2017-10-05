@@ -23,7 +23,6 @@ class App extends Component {
               <Route exact path='/problems/:id' component={ProblemShow} />
             </Switch>
           </div>
-
       </Router>
     );
   }

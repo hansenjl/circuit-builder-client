@@ -54,7 +54,7 @@ class ProblemForm extends Component {
       }]
     })
 
-    this.props.updateProblemFormData(newResistorData )
+    this.props.updateProblemFormData(newResistorData)
   }
 
   render() {

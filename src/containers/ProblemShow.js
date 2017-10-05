@@ -32,7 +32,7 @@ class ProblemShow extends Component {
             <tr>
               <td>TOTAL</td>
               <td>{tot_voltage}</td>
-              <td>{tot_current.toFixed(2)} </td>
+              <td>{tot_current} </td>
               <td> {tot_resistance} </td>
             </tr>
             {loops[0].resistors.map((resistor, idx) =>

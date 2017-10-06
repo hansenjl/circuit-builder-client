@@ -54,22 +54,20 @@ export default (state=initialState, action) => {
 
       const totParallelResistance = 1/inverseResistance
 
-      let parallelResistorArray = action.problemFormData.loops[0].resistors
+      let parallelLoopArray = action.problemFormData.loops
 
-      for (var j = 0; j < parallelResistorArray.length; j++) {
-        parallelResistorArray[j].current = (action.problemFormData.tot_voltage / parallelResistorArray[j].resistance).toFixed(2)
-        parallelResistorArray[j].voltage = action.problemFormData.tot_voltage
-        parallelResistorArray[j].num = j + 1
+      for (var j = 0; j < parallelLoopArray.length; j++) {
+        parallelLoopArray[j].resistors[0].current = (action.problemFormData.tot_voltage / parallelLoopArray[j].resistors[0].resistance).toFixed(2)
+        parallelLoopArray[j].resistors[0].voltage = action.problemFormData.tot_voltage
+        parallelLoopArray[j].resistors[0].num = j + 1
       }
 
-      const totParallelCurrent = parallelResistorArray.reduce((tot,resistor)=>{return tot += parseInt(resistor.current,10)},0)
+      const totParallelCurrent = parallelLoopArray.reduce((tot,loop)=>{return tot += parseInt(loop.resistors[0].current,10)},0)
 
       return Object.assign({},action.problemFormData,{
         tot_current: totParallelCurrent.toFixed(2) ,
         tot_resistance: totParallelResistance.toFixed(2) ,
-        loops: [{
-          resistors: parallelResistorArray
-        }]
+        loops: parallelLoopArray
       })
 
     case 'RESET_PROBLEM_FORM':

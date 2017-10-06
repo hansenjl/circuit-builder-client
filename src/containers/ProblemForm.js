@@ -43,18 +43,35 @@ class ProblemForm extends Component {
   handleAddResistor = event => {
     //add another row to the table form for the second resistor
     event.preventDefault()
-    const newResistorData = Object.assign({},this.props.problemFormData, {
-      loops: [{
-        resistors:[
-          ...this.props.problemFormData.loops[0].resistors,
-          {
-            voltage: 1,
-            resistance: 1,
-            current: 1
-          }
+
+    let newResistorData = {}
+    if (this.props.problemFormData.category === 'parallel'){
+      newResistorData = Object.assign({},this.props.problemFormData, {
+        loops: [
+          ...this.props.problemFormData.loops,
+          {resistors: [
+            {
+              voltage: 1,
+              resistance: 1,
+              current: 1
+            }
+          ]}
         ]
-      }]
-    })
+      })
+    } else if (this.props.problemFormData.category === 'series') {
+        newResistorData = Object.assign({},this.props.problemFormData, {
+        loops: [{
+          resistors:[
+            ...this.props.problemFormData.loops[0].resistors,
+            {
+              voltage: 1,
+              resistance: 1,
+              current: 1
+            }
+          ]
+        }]
+      })
+    }
     this.props.updateProblemFormData(newResistorData)
   }
 

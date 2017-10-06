@@ -50,7 +50,7 @@ export default (state=initialState, action) => {
       })
 
     case 'UPDATED_PARALLEL_DATA':
-      const inverseResistance = action.problemFormData.loops[0].resistors.reduce((tot,resistor)=>{return tot += 1/parseInt(resistor.resistance,10)},0)
+      const inverseResistance = action.problemFormData.loops.reduce((tot,loop)=>{return tot += 1/parseInt(loop.resistors[0].resistance,10)},0)
 
       const totParallelResistance = 1/inverseResistance
 

@@ -14,8 +14,8 @@ const ParallelCircuit = ({circuitData}) => (
       {Wire}
       <div className="Circuit TopRCorner"></div>
     </div>
-    {circuitData.loops[0].resistors.slice(1).map((resistor,idx) =>
-        <Loop resistor={resistor} key={idx}/>
+    {circuitData.loops.slice(1).map((loop,idx) =>
+        <Loop resistor={loop.resistors[0]} key={idx}/>
     )}
     <div className="BottomRow">
      <div className="Circuit LCorner"></div>

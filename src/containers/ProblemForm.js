@@ -19,22 +19,42 @@ class ProblemForm extends Component {
 
   handleNestedChange = event => {
     const idx = parseInt(event.target.name,10) - 1
-    const nestedProblemFormData = Object.assign({},this.props.problemFormData,{
-      loops: [{
-        resistors:[
-          ...this.props.problemFormData.loops[0].resistors.slice(0,idx),
-          {
-            ...this.props.problemFormData.loops[0].resistors[idx],
-            resistance: parseInt(event.target.value,10)
+    const res = event.target.value
+    let nestedProblemFormData = {}
+    if (this.props.problemFormData.category === 'parallel'){
+      nestedProblemFormData = Object.assign({},this.props.problemFormData,{
+        loops: [
+          ...this.props.problemFormData.loops.slice(0,idx),
+          this.props.problemFormData.loops[idx]: {
+            resistors:[
+              {
+                resistance: event.target.value
+              }
+            ]
           },
-          ...this.props.problemFormData.loops[0].resistors.slice(idx+1)
+          ...this.props.problemFormData.loops.slice(idx+1)
         ]
-      }]
-    })
+      })
+    } else if (this.props.problemFormData.category === 'series'){
+      nestedProblemFormData = Object.assign({},this.props.problemFormData,{
+        loops: [{
+          resistors:[
+            ...this.props.problemFormData.loops[0].resistors.slice(0,idx),
+            {
+              ...this.props.problemFormData.loops[0].resistors[idx],
+              resistance: parseInt(event.target.value,10)
+            },
+            ...this.props.problemFormData.loops[0].resistors.slice(idx+1)
+          ]
+        }]
+      })
+    }
+
     this.props.updateProblemFormData(nestedProblemFormData)
   }
 
   handleOnSubmit = event => {
+    //save data to db and reset form
     event.preventDefault()
     this.props.createProblem(this.props.problemFormData)
       .then(this.props.resetProblemForm)
@@ -55,7 +75,11 @@ class ProblemForm extends Component {
               resistance: 1,
               current: 1
             }
-          ]}
+          ],
+          l_voltage: 1,
+          l_resistance: 1,
+          l_current: 1
+          }
         ]
       })
     } else if (this.props.problemFormData.category === 'series') {

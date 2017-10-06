@@ -47,13 +47,14 @@ class ProblemForm extends Component {
       loops: [{
         resistors:[
           ...this.props.problemFormData.loops[0].resistors,
-          {voltage: 1,
-          resistance: 1,
-          current: 1}
+          {
+            voltage: 1,
+            resistance: 1,
+            current: 1
+          }
         ]
       }]
     })
-
     this.props.updateProblemFormData(newResistorData)
   }
 
@@ -109,22 +110,23 @@ class ProblemForm extends Component {
                 {tot_resistance}
               </td>
             </tr>
-            {loops.map( loop =>
+            { loops.map( loop =>
               loop.resistors.map((resistor, idx) =>
-              <tr key={idx}>
-                <td>Resistor {idx + 1}</td>
-                <td>{resistor.voltage}</td>
-                <td>{resistor.current}</td>
-                <td>
-                  <input
-                  type="number"
-                  name={idx + 1}
-                  onChange={this.handleNestedChange}
-                  value={resistor.resistance}
-                  min="0"/>
-                </td>
-              </tr>
-            ))}
+                <tr key={resistor.num}>
+                  <td>Resistor {resistor.num}</td>
+                  <td>{resistor.voltage}</td>
+                  <td>{resistor.current}</td>
+                  <td>
+                    <input
+                    type="number"
+                    name={resistor.num}
+                    onChange={this.handleNestedChange}
+                    value={resistor.resistance}
+                    min="0"/>
+                  </td>
+                </tr>
+              ))
+            }
             </tbody>
           </table>
           <button onClick={this.handleAddResistor}>Add a Resistor</button>

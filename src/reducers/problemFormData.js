@@ -1,3 +1,4 @@
+
 const initialState = {
   difficulty: 1,
   category: "series",
@@ -11,6 +12,7 @@ const initialState = {
       l_current: 1,
       resistors: [
         {
+          num: 1,
           voltage: 1,
           resistance: 1,
           current: 1
@@ -19,6 +21,8 @@ const initialState = {
     }
   ]
 }
+
+
 
 export default (state=initialState, action) => {
 
@@ -32,6 +36,7 @@ export default (state=initialState, action) => {
       let resistorArray = action.problemFormData.loops[0].resistors
 
       for (var i = 0; i < resistorArray.length; i++) {
+        resistorArray[i].num = i + 1
         resistorArray[i].current = totCurrent
         resistorArray[i].voltage = (totCurrent * resistorArray[i].resistance).toFixed(2)
       }
@@ -54,6 +59,7 @@ export default (state=initialState, action) => {
       for (var j = 0; j < parallelResistorArray.length; j++) {
         parallelResistorArray[j].current = (action.problemFormData.tot_voltage / parallelResistorArray[j].resistance).toFixed(2)
         parallelResistorArray[j].voltage = action.problemFormData.tot_voltage
+        parallelResistorArray[j].num = j + 1
       }
 
       const totParallelCurrent = parallelResistorArray.reduce((tot,resistor)=>{return tot += parseInt(resistor.current,10)},0)

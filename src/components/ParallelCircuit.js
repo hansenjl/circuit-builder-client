@@ -4,7 +4,6 @@ import Resistor from './Resistor';
 
 const Wire = <div className="Circuit Wire"></div>
 
-
 const ParallelCircuit = ({circuitData}) => (
   <div className="ParallelCircuit">
     <div className="TopRow">

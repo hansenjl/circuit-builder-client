@@ -22,16 +22,13 @@ class ProblemForm extends Component {
     const res = event.target.value
     let nestedProblemFormData = {}
     if (this.props.problemFormData.category === 'parallel'){
+      let newLoop = this.props.problemFormData.loops[idx]
+      newLoop.resistors[0].resistance = event.target.value
+
       nestedProblemFormData = Object.assign({},this.props.problemFormData,{
         loops: [
           ...this.props.problemFormData.loops.slice(0,idx),
-          this.props.problemFormData.loops[idx]: {
-            resistors:[
-              {
-                resistance: event.target.value
-              }
-            ]
-          },
+          newLoop,
           ...this.props.problemFormData.loops.slice(idx+1)
         ]
       })
@@ -49,7 +46,6 @@ class ProblemForm extends Component {
         }]
       })
     }
-
     this.props.updateProblemFormData(nestedProblemFormData)
   }
 

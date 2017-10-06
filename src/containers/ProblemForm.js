@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { updateProblemFormData } from '../actions/problemForm';
 import { createProblem } from '../actions/problems';
+import { updateCategory } from '../actions/problemForm';
 import  SeriesCircuit from '../components/SeriesCircuit';
 import ParallelCircuit from '../components/ParallelCircuit';
 
@@ -14,6 +15,13 @@ class ProblemForm extends Component {
       [name]: value
     })
     this.props.updateProblemFormData(currentProblemFormData)
+  }
+
+  handleCategoryChange = event => {
+    const newProblemFormData = Object.assign({}, this.props.problemFormData, {
+      [event.target.name]: event.target.value
+    })
+    this.props.updateCategory(newProblemFormData)
   }
 
 
@@ -147,7 +155,7 @@ class ProblemForm extends Component {
                 {tot_resistance}
               </td>
             </tr>
-            { loops.map( loop =>
+            {loops.map( loop =>
               loop.resistors.map((resistor, idx) =>
                 <tr key={resistor.num}>
                   <td>Resistor {resistor.num}</td>
@@ -183,4 +191,4 @@ const mapStateToProps = state => {
   }
 }
 
-export default connect(mapStateToProps, {updateProblemFormData, createProblem})(ProblemForm);
+export default connect(mapStateToProps, {updateProblemFormData, createProblem, updateCategory})(ProblemForm);

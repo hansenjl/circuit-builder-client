@@ -23,7 +23,6 @@ const initialState = {
 }
 
 
-
 export default (state=initialState, action) => {
 
   switch(action.type){
@@ -69,6 +68,7 @@ export default (state=initialState, action) => {
         tot_resistance: totParallelResistance.toFixed(2) ,
         loops: parallelLoopArray
       })
+
 
     case 'RESET_PROBLEM_FORM':
       return initialState

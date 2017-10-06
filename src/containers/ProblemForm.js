@@ -109,7 +109,8 @@ class ProblemForm extends Component {
                 {tot_resistance}
               </td>
             </tr>
-            {loops[0].resistors.map((resistor, idx) =>
+            {loops.map( loop =>
+              loop.resistors.map((resistor, idx) =>
               <tr key={idx}>
                 <td>Resistor {idx + 1}</td>
                 <td>{resistor.voltage}</td>
@@ -123,7 +124,7 @@ class ProblemForm extends Component {
                   min="0"/>
                 </td>
               </tr>
-            )}
+            ))}
             </tbody>
           </table>
           <button onClick={this.handleAddResistor}>Add a Resistor</button>

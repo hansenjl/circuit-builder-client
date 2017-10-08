@@ -5,9 +5,6 @@ import ParallelCircuit from '../components/ParallelCircuit';
 
 class ProblemShow extends Component {
 
-  // componentDidMount(){
-  //   this.props.getProblem(this.props.c)
-  // }
 
   render(){
 
@@ -57,6 +54,7 @@ class ProblemShow extends Component {
 
 const mapStateToProps = (state, ownProps) => {
   const problem = state.problems.find(problem => problem.id == ownProps.match.params.id)
+  debugger
   if (problem) {
     return { problem }
   } else {

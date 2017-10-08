@@ -48,8 +48,10 @@ export const getProblem = (id) => {
 export const createProblem = (problem) => {
   problem["loops_attributes"] = problem["loops"]
   delete problem["loops"];
-  problem["loops_attributes"][0]["resistors_attributes"] = problem["loops_attributes"][0]["resistors"]
-  delete problem["loops_attributes"][0]["resistors"]
+  for (var i = 0; i < problem["loops_attributes"].length; i++) {
+    problem["loops_attributes"][i]["resistors_attributes"] = problem["loops_attributes"][i]["resistors"]
+    delete problem["loops_attributes"][i]["resistors"]
+  }
   return dispatch => {
     return fetch(`${API_URL}/problems`, {
       method: "POST",

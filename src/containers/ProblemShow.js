@@ -3,8 +3,8 @@ import { connect } from 'react-redux';
 import SeriesCircuit from '../components/SeriesCircuit';
 import ParallelCircuit from '../components/ParallelCircuit';
 
-class ProblemShow extends Component {
 
+class ProblemShow extends Component {
 
   render(){
 
@@ -54,6 +54,7 @@ class ProblemShow extends Component {
 
 const mapStateToProps = (state, ownProps) => {
   const problem = state.problems.find(problem => problem.id == ownProps.match.params.id)
+
   if (problem) {
     return { problem }
   } else {

@@ -174,7 +174,7 @@ class ProblemForm extends Component {
             }
             </tbody>
           </table>
-          <button onClick={this.handleAddResistor}>Add a Resistor</button>
+          <button onClick={this.handleAddResistor} disabled={(loops.reduce((tot,loop)=>{return tot += loop.resistors.length},0)) >= 15}>Add a Resistor</button>
           <input type="submit" value="Save"/>
         </form>
         <div className="CircuitContainer">

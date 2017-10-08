@@ -44,9 +44,9 @@ const SeriesCircuit = ({circuitData}) => (
       <div className="BottomRow">
         <div className="Circuit LCorner"></div>
         {circuitData.loops[0].resistors.length > 7 ? <Resistor resistor={circuitData.loops[0].resistors[7]} /> : Wire}
-        {circuitData.loops[0].resistors.length > 14 ? <Resistor resistor={circuitData.loops[0].resistors[14]} /> : Wire}
+        {circuitData.loops[0].resistors.length > 13 ? <Resistor resistor={circuitData.loops[0].resistors[13]} /> : Wire}
         <div className="Circuit Resistor">{circuitData.loops[0].resistors[0].resistance} Ω </div>
-        {circuitData.loops[0].resistors.length > 15 ? <Resistor resistor={circuitData.loops[0].resistors[15]} /> : Wire}
+        {circuitData.loops[0].resistors.length > 14 ? <Resistor resistor={circuitData.loops[0].resistors[14]} /> : Wire}
         {circuitData.loops[0].resistors.length > 8 ? <Resistor resistor={circuitData.loops[0].resistors[8]} /> : Wire}
         <div className="Circuit RCorner"></div>
       </div>

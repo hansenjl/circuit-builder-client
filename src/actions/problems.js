@@ -11,6 +11,12 @@ const setProblems = problems => {
   }
 }
 
+// const setProblem = problem => {
+//   return {
+//     type: 'GET_PROBLEM_SUCCESS',
+//     problem
+//   }
+// }
 
 const addProblem = problem => {
   return {
@@ -28,6 +34,15 @@ export const getProblems = () => {
       .catch(error => console.log(error))
   }
 }
+
+// export const getProblem = (id) => {
+//   return dispatch => {
+//     return fetch(`${API_URL}/problems/${id}`)
+//       .then(response => response.json())
+//       .then(problem => dispatch(setProblem(problem)))
+//       .catch(error => console.log(error))
+//   }
+// }
 
 
 export const createProblem = (problem) => {

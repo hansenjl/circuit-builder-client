@@ -21,6 +21,7 @@ class ProblemForm extends Component {
     const newProblemFormData = Object.assign({}, this.props.problemFormData, {
       [event.target.name]: event.target.value
     })
+
     this.props.updateCategory(newProblemFormData)
   }
 
@@ -111,7 +112,7 @@ class ProblemForm extends Component {
         <form onSubmit={this.handleOnSubmit} >
           <span>
             <label> Circuit Type: </label>
-            <select name="category" value={category} onChange={this.handleOnChange}>
+            <select name="category" value={category} onChange={this.handleCategoryChange}>
               <option value="series">Series</option>
               <option value="parallel">Parallel</option>
               <option value="combo">Combo</option>

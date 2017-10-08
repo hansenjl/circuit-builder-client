@@ -23,7 +23,7 @@ export const updateCategory = problemFormData => {
   let resistors = []
   for (var i = 0; i < problemFormData.loops.length; i++) {
     for (var j = 0; j < problemFormData.loops[i].resistors.length; j++) {
-      resistors << problemFormData.loops[i].resistors[j]
+      resistors.push(problemFormData.loops[i].resistors[j])
     }
   }
   switch (problemFormData.category){
@@ -35,12 +35,12 @@ export const updateCategory = problemFormData => {
     case 'parallel':
       let loopArray = []
       for (var k = 0; k < resistors.length; k++) {
-        loopArray << {
+        loopArray.push({
           l_current: 1,
           l_voltage: 1,
           l_resistance: resistors[k].resistance,
           resistors: [resistors[k]]
-        }
+        })
       }
       return {
         type: 'UPDATED_PARALLEL_DATA',
@@ -51,7 +51,7 @@ export const updateCategory = problemFormData => {
     default:
       let resistorArray = []
         for (var b = 0; b < resistors.length; b++) {
-          resistorArray << resistors[b]
+          resistorArray.push(resistors[b])
         }
       return {
         type: 'UPDATED_SERIES_DATA',

@@ -28,7 +28,6 @@ class ProblemForm extends Component {
 
   handleNestedChange = event => {
     const idx = parseInt(event.target.name,10) - 1
-    const res = event.target.value
     let nestedProblemFormData = {}
     if (this.props.problemFormData.category === 'parallel'){
       let newLoop = this.props.problemFormData.loops[idx]

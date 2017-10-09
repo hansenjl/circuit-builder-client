@@ -2,9 +2,17 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import SeriesCircuit from '../components/SeriesCircuit';
 import ParallelCircuit from '../components/ParallelCircuit';
+import NavBar from '../components/NavBar';
+import { deleteProblem } from '../actions/problems';
 
 
 class ProblemShow extends Component {
+
+  handleOnClick = event => {
+    event.preventDefault()
+    this.props.deleteProblem(this.props.problem.id)
+      .then(this.props.history.push('/problems'))
+  }
 
   render(){
 
@@ -12,10 +20,11 @@ class ProblemShow extends Component {
 
     return(
       <div className="ShowProblemContainer">
+        <NavBar />
         <div>
           <h3> Circuit Type: <em>{category}</em> </h3>
           <h3> Difficulty: {difficulty} </h3>
-
+          <button onClick={this.handleOnClick} value="delete">Delete Circuit</button>
           <table>
             <thead>
             <tr>
@@ -63,4 +72,4 @@ const mapStateToProps = (state, ownProps) => {
 }
 
 
-export default connect(mapStateToProps)(ProblemShow);
+export default connect(mapStateToProps, {deleteProblem})(ProblemShow);

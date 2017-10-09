@@ -5,6 +5,7 @@ import { createProblem } from '../actions/problems';
 import { updateCategory } from '../actions/problemForm';
 import  SeriesCircuit from '../components/SeriesCircuit';
 import ParallelCircuit from '../components/ParallelCircuit';
+import NavBar from '../components/NavBar';
 
 
 class ProblemForm extends Component {
@@ -107,78 +108,81 @@ class ProblemForm extends Component {
     const { difficulty, category, tot_voltage, tot_resistance, loops } = this.props.problemFormData;
 
     return(
-      <div className="FormContainer">
-        <form onSubmit={this.handleOnSubmit} >
-          <span>
-            <label> Circuit Type: </label>
-            <select name="category" value={category} onChange={this.handleCategoryChange}>
-              <option value="series">Series</option>
-              <option value="parallel">Parallel</option>
-              <option value="combo">Combo</option>
-            </select>
-          </span>
-          <span>
-              <label> Difficulty: </label>
-              <input
-                type="number"
-                name="difficulty"
-                onChange={this.handleOnChange}
-                value={difficulty}
-                min="1"
-                max="5"/>
-          </span>
-          <table>
-            <thead>
-            <tr>
-              <th></th>
-              <th>Voltage</th>
-              <th>Current</th>
-              <th>Resistance</th>
-            </tr>
-            </thead>
-            <tbody>
-            <tr>
-              <td>TOTAL</td>
-              <td>
+      <div>
+        <NavBar/>
+        <div className="FormContainer">
+          <form onSubmit={this.handleOnSubmit} >
+            <span>
+              <label> Circuit Type: </label>
+              <select name="category" value={category} onChange={this.handleCategoryChange}>
+                <option value="series">Series</option>
+                <option value="parallel">Parallel</option>
+                <option value="combo">Combo</option>
+              </select>
+            </span>
+            <span>
+                <label> Difficulty: </label>
                 <input
                   type="number"
-                  name="tot_voltage"
+                  name="difficulty"
                   onChange={this.handleOnChange}
-                  value={tot_voltage}
-                  min="0"
-                  />
-              </td>
-              <td>
-                {(tot_voltage / tot_resistance).toFixed(2)}
-              </td>
-              <td>
-                {tot_resistance}
-              </td>
-            </tr>
-            {loops.map( loop =>
-              loop.resistors.map((resistor, idx) =>
-                <tr key={resistor.num}>
-                  <td>Resistor {resistor.num}</td>
-                  <td>{resistor.voltage}</td>
-                  <td>{resistor.current}</td>
-                  <td>
-                    <input
+                  value={difficulty}
+                  min="1"
+                  max="5"/>
+            </span>
+            <table>
+              <thead>
+              <tr>
+                <th></th>
+                <th>Voltage</th>
+                <th>Current</th>
+                <th>Resistance</th>
+              </tr>
+              </thead>
+              <tbody>
+              <tr>
+                <td>TOTAL</td>
+                <td>
+                  <input
                     type="number"
-                    name={resistor.num}
-                    onChange={this.handleNestedChange}
-                    value={resistor.resistance}
-                    min="0"/>
-                  </td>
-                </tr>
-              ))
-            }
-            </tbody>
-          </table>
-          <button onClick={this.handleAddResistor} disabled={(loops.reduce((tot,loop)=>{return tot += loop.resistors.length},0)) >= 15}>Add a Resistor</button>
-          <input type="submit" value="Save"/>
-        </form>
-        <div className="CircuitContainer">
-          {this.props.problemFormData.category === "series" ? < SeriesCircuit circuitData={this.props.problemFormData} /> : < ParallelCircuit circuitData={this.props.problemFormData} />}
+                    name="tot_voltage"
+                    onChange={this.handleOnChange}
+                    value={tot_voltage}
+                    min="0"
+                    />
+                </td>
+                <td>
+                  {(tot_voltage / tot_resistance).toFixed(2)}
+                </td>
+                <td>
+                  {tot_resistance}
+                </td>
+              </tr>
+              {loops.map( loop =>
+                loop.resistors.map((resistor, idx) =>
+                  <tr key={resistor.num}>
+                    <td>Resistor {resistor.num}</td>
+                    <td>{resistor.voltage}</td>
+                    <td>{resistor.current}</td>
+                    <td>
+                      <input
+                      type="number"
+                      name={resistor.num}
+                      onChange={this.handleNestedChange}
+                      value={resistor.resistance}
+                      min="0"/>
+                    </td>
+                  </tr>
+                ))
+              }
+              </tbody>
+            </table>
+            <button onClick={this.handleAddResistor} disabled={(loops.reduce((tot,loop)=>{return tot += loop.resistors.length},0)) >= 15}>Add a Resistor</button>
+            <input type="submit" value="Save"/>
+          </form>
+          <div className="CircuitContainer">
+            {this.props.problemFormData.category === "series" ? < SeriesCircuit circuitData={this.props.problemFormData} /> : < ParallelCircuit circuitData={this.props.problemFormData} />}
+          </div>
         </div>
       </div>
     )

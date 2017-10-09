@@ -6,8 +6,8 @@ export default (state = [], action) => {
     case 'CREATE_PROBLEM_SUCCESS':
       return state.concat(action.problem);
 
-    case 'GET_PROBLEM_SUCCESS':
-      return action.problem;
+    case 'DELETE_PROBLEM_SUCCESS':
+      return state.problems.splice(action.problemId,1)
 
     default:
       return state;

@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import './Problems.css';
 import { getProblems } from '../actions/problems';
 import Problem from '../components/Problem';
+import NavBar from '../components/NavBar';
 
 class Problems extends Component {
 
@@ -13,6 +14,7 @@ class Problems extends Component {
   render(){
     return(
       <div>
+        <NavBar/>
         <div className="ProblemsContainer">
           <h3>Choose from existing problems:</h3>
             {this.props.problems.map(problem =>

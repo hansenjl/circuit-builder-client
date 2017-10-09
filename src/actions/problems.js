@@ -25,6 +25,14 @@ const addProblem = problem => {
   }
 }
 
+const removeProblem = problemId => {
+  debugger
+  return{
+    type: 'DELETE_PROBLEM_SUCCESS',
+    problemId: problemId
+  }
+}
+
 // ** Async Actions **
 export const getProblems = () => {
   return dispatch => {
@@ -43,6 +51,15 @@ export const getProblems = () => {
 //       .catch(error => console.log(error))
 //   }
 // }
+
+export const deleteProblem = (id) => {
+  return dispatch => {
+    return fetch(`${API_URL}/problems/${id}`, {method: 'delete'})
+      .then(response => response.json())
+      .then(id => dispatch(removeProblem(id)))
+      .catch(error => console.log(error))
+  }
+}
 
 
 export const createProblem = (problem) => {

@@ -3,8 +3,8 @@ import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
 import './App.css';
 import Problems from './Problems';
 import ProblemForm from './ProblemForm';
-import NavBar from '../components/NavBar';
-import ProblemShow from './ProblemShow'
+import ProblemShow from './ProblemShow';
+import WelcomeHeader from '../components/WelcomeHeader';
 
 
 class App extends Component {
@@ -13,12 +13,9 @@ class App extends Component {
     return (
       <Router>
           <div className="App">
-            <header className="App-header">
-              <h1 className="App-title">Welcome to Circuit Builder</h1>
-            </header>
-            <NavBar/>
             <Switch>
-              <Route exact path='/' component={Problems} />
+              <Route exact path='/' component={WelcomeHeader} />
+              <Route exact path='/problems' component={Problems} />
               <Route exact path='/problems/new' component={ProblemForm} />
               <Route exact path='/problems/:id' component={ProblemShow} />
             </Switch>

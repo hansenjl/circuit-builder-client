@@ -54,6 +54,18 @@ class ProblemForm extends Component {
           ]
         }]
       })
+    } else{
+      // Fix this to reflect combo - right now just parallel rules
+      let newLoop = this.props.problemFormData.loops[idx]
+      newLoop.resistors[0].resistance = event.target.value
+
+      nestedProblemFormData = Object.assign({},this.props.problemFormData,{
+        loops: [
+          ...this.props.problemFormData.loops.slice(0,idx),
+          newLoop,
+          ...this.props.problemFormData.loops.slice(idx+1)
+        ]
+      })
     }
     this.props.updateProblemFormData(nestedProblemFormData)
   }

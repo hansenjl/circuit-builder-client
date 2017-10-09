@@ -70,6 +70,11 @@ export default (state=initialState, action) => {
       })
 
     case 'UPDATED_COMBO_DATA':
+      //Calculate the total resistance by adding individual resistance of resistors on the same loop before adding them with parallel rules
+      const comboResistance = 1/ (action.problemFormData.loops.reduce((tot,loop)=>{return tot += 1/(loop.resistors.reduce((total,resistor)=>{return total += parseInt(resistor.resistance,10)},0))},0))
+
+      debugger
+
       return Object.assign({},initialState,{
         category: 'combo'
       })

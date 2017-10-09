@@ -3,7 +3,8 @@ export const updateProblemFormData  = problemFormData => {
   switch (problemFormData.category){
     case 'combo':
       return {
-        type: 'UPDATED_COMBO_DATA'
+        type: 'UPDATED_COMBO_DATA',
+        problemFormData
       }
     case 'parallel':
       return {

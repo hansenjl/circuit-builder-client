@@ -69,6 +69,10 @@ export default (state=initialState, action) => {
         loops: parallelLoopArray
       })
 
+    case 'UPDATED_COMBO_DATA':
+      return Object.assign({},initialState,{
+        category: 'combo'
+      })
 
     case 'RESET_PROBLEM_FORM':
       return initialState

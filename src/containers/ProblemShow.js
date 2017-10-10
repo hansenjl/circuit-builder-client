@@ -19,6 +19,16 @@ class ProblemShow extends Component {
 
     const { difficulty, category, tot_current, tot_voltage, tot_resistance, loops } = this.props.problem;
 
+
+    let circuitDisplay = null;
+    if (category === "series"){
+      circuitDisplay = < SeriesCircuit circuitData={this.props.problem} />
+    } else if (category === "parallel"){
+      circuitDisplay = < ParallelCircuit circuitData={this.props.problem} />
+    } else {
+      circuitDisplay = < ComboCircuit circuitData={this.props.problem} />
+    }
+
     return(
       <div className="ShowProblemContainer">
         <NavBar />
@@ -56,8 +66,8 @@ class ProblemShow extends Component {
         </div>
         <br></br>
         <div className="CircuitContainer">
-          {category === "series" ? < SeriesCircuit circuitData={this.props.problem} /> : < ParallelCircuit circuitData={this.props.problem} />}
-        </div>
+            {circuitDisplay}
+          </div>
       </div>
     )
   }

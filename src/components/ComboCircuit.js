@@ -4,8 +4,8 @@ import Resistor from './Resistor';
 
 const Wire = <div className="Circuit Wire"></div>
 
-const ParallelCircuit = ({circuitData}) => (
-  <div className="ParallelCircuit">
+const ComboCircuit = ({circuitData}) => (
+  <div className="ComboCircuit">
     <div className="TopRow">
       <div className="Circuit Top LCorner"></div>
       {Wire}
@@ -18,13 +18,13 @@ const ParallelCircuit = ({circuitData}) => (
     )}
     <div className="BottomRow">
      <div className="Circuit LCorner"></div>
-      {Wire}
+      {circuitData.loops[0].resistors.length > 1 ? <Resistor resistor={circuitData.loops[0].resistors[1]} /> : Wire}
        <Resistor resistor={circuitData.loops[0].resistors[0]} />
-      {Wire}
+      {circuitData.loops[0].resistors.length > 2 ? <Resistor resistor={circuitData.loops[0].resistors[2]} /> : Wire}
       <div className="Circuit RCorner"></div>
     </div>
   </div>
 )
 
 
-export default ParallelCircuit
+export default ComboCircuit

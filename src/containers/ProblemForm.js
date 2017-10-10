@@ -6,7 +6,7 @@ import { updateCategory } from '../actions/problemForm';
 import  SeriesCircuit from '../components/SeriesCircuit';
 import ParallelCircuit from '../components/ParallelCircuit';
 import NavBar from '../components/NavBar';
-
+import ComboCircuit from '../components/ComboCircuit';
 
 class ProblemForm extends Component {
 
@@ -158,6 +158,15 @@ class ProblemForm extends Component {
   render() {
     const { difficulty, category, tot_voltage, tot_resistance, loops } = this.props.problemFormData;
 
+    let circuitDisplay = null;
+    if (category === "series"){
+      circuitDisplay = < SeriesCircuit circuitData={this.props.problemFormData} />
+    } else if (category === "parallel"){
+      circuitDisplay = < ParallelCircuit circuitData={this.props.problemFormData} />
+    } else {
+      circuitDisplay = < ComboCircuit circuitData={this.props.problemFormData} />
+    }
+
     return(
       <div>
         <NavBar/>
@@ -234,7 +243,7 @@ class ProblemForm extends Component {
             <br></br>
             { category === "combo" ? (
               <span>
-                <button onClick={this.handleAddLoop} disabled={(loops.reduce((tot,loop)=>{return tot += loop.resistors.length},0)) >= 6}>Add a Loop</button>
+                <button onClick={this.handleAddLoop} disabled={loops.length >= 6}>Add a Loop</button>
                 <button onClick={this.handleAddResistor} disabled={loops[loops.length-1].resistors.length >= 3}>Add a Resistor</button>
               </span>
               ) : (
@@ -246,7 +255,7 @@ class ProblemForm extends Component {
           </form>
           <br></br>
           <div className="CircuitContainer">
-            {this.props.problemFormData.category === "series" ? < SeriesCircuit circuitData={this.props.problemFormData} /> : < ParallelCircuit circuitData={this.props.problemFormData} />}
+            {circuitDisplay}
           </div>
         </div>
       </div>

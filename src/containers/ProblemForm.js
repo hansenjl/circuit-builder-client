@@ -208,7 +208,16 @@ class ProblemForm extends Component {
               </tbody>
             </table>
             <br></br>
-            <button onClick={this.handleAddResistor} disabled={(loops.reduce((tot,loop)=>{return tot += loop.resistors.length},0)) >= 15}>Add a Resistor</button>
+            { category === "combo" ? (
+              <span>
+                <button onClick={this.handleAddLoop} disabled={(loops.reduce((tot,loop)=>{return tot += loop.resistors.length},0)) >= 6}>Add a Loop</button>
+                <button onClick={this.handleAddResistor} disabled={loops[loops.length-1].resistors.length >= 3}>Add a Resistor</button>
+              </span>
+              ) : (
+              <button onClick={this.handleAddResistor} disabled={(loops.reduce((tot,loop)=>{return tot += loop.resistors.length},0)) >= 15}>Add a Resistor</button>
+              )
+            }
+
             <input type="submit" value="Save"/>
           </form>
           <br></br>

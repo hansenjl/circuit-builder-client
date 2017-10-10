@@ -76,6 +76,8 @@ export default (state=initialState, action) => {
       const comboCurrent = action.problemFormData.tot_voltage / comboResistance
       let comboLoopArray = action.problemFormData.loops
 
+      //calculate and set resistor current and voltage values
+
       for (var k = 0; k < comboLoopArray.length; k++) {
         let rCount = 1
         comboLoopArray[k].l_resistance = comboLoopArray[k].resistors.reduce((total,resistor)=>{return total += resistor.resistance},0)

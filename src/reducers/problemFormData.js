@@ -73,7 +73,7 @@ export default (state=initialState, action) => {
       //Calculate the total resistance by adding individual resistance of resistors on the same loop before adding them with parallel rules
       const comboResistance = 1/ (action.problemFormData.loops.reduce((tot,loop)=>{return tot += 1/(loop.resistors.reduce((total,resistor)=>{return total += parseInt(resistor.resistance,10)},0))},0))
 
-      const comboCurrent = action.problemFormData.tot_voltage / comboResistance
+
       let comboLoopArray = action.problemFormData.loops
 
       //calculate and set resistor current and voltage values
@@ -82,18 +82,23 @@ export default (state=initialState, action) => {
       for (var k = 0; k < comboLoopArray.length; k++) {
         comboLoopArray[k].l_resistance = comboLoopArray[k].resistors.reduce((total,resistor)=>{return total += parseInt(resistor.resistance,10)},0)
         comboLoopArray[k].l_voltage = action.problemFormData.tot_voltage
-        comboLoopArray[k].l_current = (comboLoopArray[k].l_voltage /comboLoopArray[k].l_resistance).toFixed(2)
+        comboLoopArray[k].l_current = comboLoopArray[k].l_voltage /comboLoopArray[k].l_resistance
         for (var r = 0; r < comboLoopArray[k].resistors.length; r++ ){
           comboLoopArray[k].resistors[r].num = rCount
-          comboLoopArray[k].resistors[r].current = comboLoopArray[k].l_current
-          comboLoopArray[k].resistors[r].voltage = comboLoopArray[k].l_current * comboLoopArray[k].resistors[r].resistance
+          comboLoopArray[k].resistors[r].current = comboLoopArray[k].l_current.toFixed(2)
+          comboLoopArray[k].resistors[r].voltage = (comboLoopArray[k].l_current * comboLoopArray[k].resistors[r].resistance).toFixed(2)
           rCount += 1
         }
       }
 
 
+      const comboCurrent = comboLoopArray.reduce((total,loop)=>{
+        return total += loop.l_current
+      })
+
+
       return Object.assign({},action.problemFormData,{
-        tot_current: comboCurrent.toFixed(2) ,
+        tot_current: comboCurrent,
         tot_resistance: comboResistance.toFixed(2) ,
         loops: comboLoopArray
       })

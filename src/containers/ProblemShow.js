@@ -4,6 +4,7 @@ import SeriesCircuit from '../components/SeriesCircuit';
 import ParallelCircuit from '../components/ParallelCircuit';
 import NavBar from '../components/NavBar';
 import { deleteProblem } from '../actions/problems';
+import ComboCircuit from '../components/ComboCircuit';
 
 
 class ProblemShow extends Component {

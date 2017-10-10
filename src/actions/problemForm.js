@@ -30,7 +30,23 @@ export const updateCategory = problemFormData => {
     case 'combo':
       return {
         type: 'UPDATED_COMBO_DATA',
-        problemFormData
+        problemFormData: Object.assign({},problemFormData, {
+          loops: [
+            {
+              l_current: 1,
+              l_voltage: 1,
+              l_resistance: 1,
+              resistors: [
+                {
+                  num: 1,
+                  resistance: 1,
+                  current: 1,
+                  voltage: 1
+                }
+              ]
+            }
+          ]
+        })
       }
     case 'parallel':
       let loopArray = []

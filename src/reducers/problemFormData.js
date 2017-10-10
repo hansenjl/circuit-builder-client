@@ -61,7 +61,7 @@ export default (state=initialState, action) => {
         parallelLoopArray[j].resistors[0].num = j + 1
       }
 
-      const totParallelCurrent = parallelLoopArray.reduce((tot,loop)=>{return tot += parseInt(loop.resistors[0].current,10)},0)
+      const totParallelCurrent = parallelLoopArray.reduce((tot,loop)=>{return tot += parseFloat(loop.resistors[0].current)},0)
 
       return Object.assign({},action.problemFormData,{
         tot_current: totParallelCurrent.toFixed(2) ,
@@ -92,13 +92,12 @@ export default (state=initialState, action) => {
       }
 
 
-      const comboCurrent = comboLoopArray.reduce((total,loop)=>{
-        return total += loop.l_current
-      })
-
+      const comboCurrent = comboLoopArray.reduce((totalCurrent,loop)=>{
+        return totalCurrent += parseFloat(loop.l_current)
+      },0)
 
       return Object.assign({},action.problemFormData,{
-        tot_current: comboCurrent,
+        tot_current: comboCurrent.toFixed(2),
         tot_resistance: comboResistance.toFixed(2) ,
         loops: comboLoopArray
       })

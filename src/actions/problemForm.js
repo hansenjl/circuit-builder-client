@@ -48,6 +48,7 @@ export const updateCategory = problemFormData => {
           ]
         })
       }
+
     case 'parallel':
       let loopArray = []
       for (var k = 0; k < resistors.length; k++) {

@@ -26,7 +26,6 @@ const addProblem = problem => {
 }
 
 const removeProblem = problemId => {
-  debugger
   return{
     type: 'DELETE_PROBLEM_SUCCESS',
     problemId: problemId
@@ -69,6 +68,7 @@ export const createProblem = (problem) => {
     problem["loops_attributes"][i]["resistors_attributes"] = problem["loops_attributes"][i]["resistors"]
     delete problem["loops_attributes"][i]["resistors"]
   }
+
   return dispatch => {
     return fetch(`${API_URL}/problems`, {
       method: "POST",

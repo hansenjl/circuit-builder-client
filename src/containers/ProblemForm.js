@@ -77,6 +77,28 @@ class ProblemForm extends Component {
       .then(this.props.resetProblemForm)
   }
 
+  handleAddLoop = event => {
+    //Add a loop for combo circuits
+    event.preventDefault()
+    let newLoopData = Object.assign({},this.props.problemFormData, {
+      loops: [
+        ...this.props.problemFormData.loops,
+        {resistors: [
+            {
+              voltage: 1,
+              resistance: 1,
+              current: 1
+            }
+          ],
+          l_voltage: 1,
+          l_resistance: 1,
+          l_current: 1
+        }
+      ]
+    })
+    this.props.updateProblemFormData(newLoopData)
+  }
+
   handleAddResistor = event => {
     //add another row to the table form for the second resistor
     event.preventDefault()

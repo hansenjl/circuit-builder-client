@@ -78,8 +78,8 @@ export default (state=initialState, action) => {
 
       //calculate and set resistor current and voltage values
 
+      let rCount = 1
       for (var k = 0; k < comboLoopArray.length; k++) {
-        let rCount = 1
         comboLoopArray[k].l_resistance = comboLoopArray[k].resistors.reduce((total,resistor)=>{return total += resistor.resistance},0)
         comboLoopArray[k].l_voltage = action.problemFormData.tot_voltage
         comboLoopArray[k].l_current = (comboLoopArray[k].l_voltage /comboLoopArray[k].l_resistance).toFixed(2)

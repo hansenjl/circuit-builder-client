@@ -137,9 +137,11 @@ class ProblemForm extends Component {
     } else {
       //Handle Combo Circuits
       //Add resistor to the last loop array
+
       newResistorData = Object.assign({},this.props.problemFormData, {
-        loops: [{
-          resistors:[
+        loops: [
+          ...this.props.problemFormData.loops.slice(0,this.props.problemFormData.loops.length-1),
+          {resistors:[
             ...this.props.problemFormData.loops[this.props.problemFormData.loops.length-1].resistors,
             {
               voltage: 1,

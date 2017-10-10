@@ -91,7 +91,6 @@ export default (state=initialState, action) => {
         }
       }
 
-      debugger
 
       return Object.assign({},action.problemFormData,{
         tot_current: comboCurrent.toFixed(2) ,

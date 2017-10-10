@@ -62,7 +62,7 @@ button:disabled{
 }
 
 .Wire{
-  background-image: url("./wire.png");
+  background-image: url("./images/wire.png");
 }
 
 
@@ -74,32 +74,32 @@ button:disabled{
 }
 
 .Resistor{
-  background-image: url("./resistor.png");
+  background-image: url("./images/resistor.png");
 }
 
 .Junction{
-  background-image: url("./junction.png");
+  background-image: url("./images/junction.png");
 }
 
 
 .LCorner{
-  background-image: url("./corner.png");
+  background-image: url("./images/corner.png");
 }
 
 .RCorner{
-  background-image: url("./corner.png");
+  background-image: url("./images/corner.png");
   -webkit-transform: rotate(270deg);
   transform: rotate(270deg);
 }
 
 .TopRCorner{
-  background-image: url("./corner.png");
+  background-image: url("./images/corner.png");
   -webkit-transform: rotate(180deg);
   transform: rotate(180deg);
 }
 
 .Battery{
-  background-image: url("./battery.png");
+  background-image: url("./images/battery.png");
 }
 
 .BottomRow{

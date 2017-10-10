@@ -13,7 +13,7 @@ const ComboCircuit = ({circuitData}) => (
       {Wire}
       <div className="Circuit TopRCorner"></div>
     </div>
-    {circuitData.loops.slice(1).map((loop,idx) =>
+    {circuitData.loops.slice(1).reverse().map((loop,idx) =>
         <Loop resistors={loop.resistors} key={idx}/>
     )}
     <div className="BottomRow">

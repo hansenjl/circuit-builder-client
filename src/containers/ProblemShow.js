@@ -14,6 +14,7 @@ class ProblemShow extends Component {
       .then(this.props.history.push('/problems'))
   }
 
+
   render(){
 
     const { difficulty, category, tot_current, tot_voltage, tot_resistance, loops } = this.props.problem;
@@ -52,6 +53,7 @@ class ProblemShow extends Component {
             </tbody>
           </table>
         </div>
+        <br></br>
         <div className="CircuitContainer">
           {category === "series" ? < SeriesCircuit circuitData={this.props.problem} /> : < ParallelCircuit circuitData={this.props.problem} />}
         </div>
@@ -62,6 +64,7 @@ class ProblemShow extends Component {
 
 
 const mapStateToProps = (state, ownProps) => {
+
   const problem = state.problems.find(problem => problem.id == ownProps.match.params.id)
 
   if (problem) {

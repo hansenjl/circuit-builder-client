@@ -73,10 +73,28 @@ export default (state=initialState, action) => {
       //Calculate the total resistance by adding individual resistance of resistors on the same loop before adding them with parallel rules
       const comboResistance = 1/ (action.problemFormData.loops.reduce((tot,loop)=>{return tot += 1/(loop.resistors.reduce((total,resistor)=>{return total += parseInt(resistor.resistance,10)},0))},0))
 
+      const comboCurrent = action.problemFormData.tot_voltage / comboResistance
+      let comboLoopArray = action.problemFormData.loops
+
+      for (var k = 0; k < comboLoopArray.length; k++) {
+        let rCount = 1
+        comboLoopArray[k].l_resistance = comboLoopArray[k].resistors.reduce((total,resistor)=>{return total += resistor.resistance},0)
+        comboLoopArray[k].l_voltage = action.problemFormData.tot_voltage
+        comboLoopArray[k].l_current = (comboLoopArray[k].l_voltage /comboLoopArray[k].l_resistance).toFixed(2)
+        for (var r = 0; r < comboLoopArray[k].resistors.length; r++ ){
+          comboLoopArray[k].resistors[r].num = rCount
+          comboLoopArray[k].resistors[r].current = comboLoopArray[k].l_current
+          comboLoopArray[k].resistors[r].voltage = comboLoopArray[k].l_current * comboLoopArray[k].resistors[r].resistance
+          rCount += 1
+        }
+      }
+
       debugger
 
-      return Object.assign({},initialState,{
-        category: 'combo'
+      return Object.assign({},action.problemFormData,{
+        tot_current: comboCurrent.toFixed(2) ,
+        tot_resistance: comboResistance.toFixed(2) ,
+        loops: comboLoopArray
       })
 
     case 'RESET_PROBLEM_FORM':

@@ -112,6 +112,21 @@ class ProblemForm extends Component {
           ]
         }]
       })
+    } else {
+      //Handle Combo Circuits
+      //Add resistor to the last loop array
+      newResistorData = Object.assign({},this.props.problemFormData, {
+        loops: [{
+          resistors:[
+            ...this.props.problemFormData.loops[this.props.problemFormData.loops.length-1].resistors,
+            {
+              voltage: 1,
+              resistance: 1,
+              current: 1
+            }
+          ]
+        }]
+      })
     }
     this.props.updateProblemFormData(newResistorData)
   }
@@ -124,24 +139,27 @@ class ProblemForm extends Component {
         <NavBar/>
         <div className="FormContainer">
           <form onSubmit={this.handleOnSubmit} >
-            <span>
-              <label> Circuit Type: </label>
-              <select name="category" value={category} onChange={this.handleCategoryChange}>
-                <option value="series">Series</option>
-                <option value="parallel">Parallel</option>
-                <option value="combo">Combo</option>
-              </select>
-            </span>
-            <span>
-                <label> Difficulty: </label>
-                <input
-                  type="number"
-                  name="difficulty"
-                  onChange={this.handleOnChange}
-                  value={difficulty}
-                  min="1"
-                  max="5"/>
-            </span>
+            <div>
+              <span>
+                <label> Circuit Type: </label>
+                <select name="category" value={category} onChange={this.handleCategoryChange}>
+                  <option value="series">Series</option>
+                  <option value="parallel">Parallel</option>
+                  <option value="combo">Combo</option>
+                </select>
+              </span>
+              <span>
+                  <label> Difficulty: </label>
+                  <input
+                    type="number"
+                    name="difficulty"
+                    onChange={this.handleOnChange}
+                    value={difficulty}
+                    min="1"
+                    max="5"/>
+              </span>
+            </div>
+            <br></br>
             <table>
               <thead>
               <tr>
@@ -189,9 +207,11 @@ class ProblemForm extends Component {
               }
               </tbody>
             </table>
+            <br></br>
             <button onClick={this.handleAddResistor} disabled={(loops.reduce((tot,loop)=>{return tot += loop.resistors.length},0)) >= 15}>Add a Resistor</button>
             <input type="submit" value="Save"/>
           </form>
+          <br></br>
           <div className="CircuitContainer">
             {this.props.problemFormData.category === "series" ? < SeriesCircuit circuitData={this.props.problemFormData} /> : < ParallelCircuit circuitData={this.props.problemFormData} />}
           </div>

@@ -185,7 +185,7 @@ class ProblemForm extends Component {
     }
 
     return(
-      <div>
+      <div className="Wrapper">
         <NavBar/>
         <div className="FormContainer">
           <form onSubmit={this.handleOnSubmit} >

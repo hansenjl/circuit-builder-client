@@ -1,6 +1,9 @@
 .ProblemContainer{
   padding: 24px;
 }
+.Wrapper {
+  padding: 24px;
+}
 
 .ProblemCard {
   background: whitesmoke;

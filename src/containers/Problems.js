@@ -13,7 +13,7 @@ class Problems extends Component {
 
   render(){
     return(
-      <div>
+      <div className="Wrapper">
         <NavBar/>
         <div className="ProblemsContainer">
           <h3>Choose from existing problems:</h3>

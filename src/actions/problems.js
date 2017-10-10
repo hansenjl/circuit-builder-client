@@ -11,12 +11,6 @@ const setProblems = problems => {
   }
 }
 
-// const setProblem = problem => {
-//   return {
-//     type: 'GET_PROBLEM_SUCCESS',
-//     problem
-//   }
-// }
 
 const addProblem = problem => {
   return {

@@ -42,14 +42,15 @@ class ProblemShow extends Component {
               <td>{tot_current} </td>
               <td> {tot_resistance} </td>
             </tr>
-            {loops[0].resistors.map((resistor, idx) =>
+            {loops.map( loop =>
+              loop.resistors.map((resistor, idx) =>
               <tr key={idx}>
-                <td>Resistor {idx + 1}</td>
+                <td>Resistor {resistor.num}</td>
                 <td>{resistor.voltage}</td>
                 <td>{resistor.current}</td>
                 <td>{resistor.resistance}</td>
               </tr>
-            )}
+            ))}
             </tbody>
           </table>
         </div>

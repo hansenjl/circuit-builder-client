@@ -28,6 +28,8 @@ class ProblemForm extends Component {
 
 
   handleNestedChange = event => {
+    //handle changes when the user changes the resistance of a resistor
+
     const idx = parseInt(event.target.name,10) - 1
     let nestedProblemFormData = {}
     if (this.props.problemFormData.category === 'parallel'){
@@ -55,15 +57,27 @@ class ProblemForm extends Component {
         }]
       })
     } else{
-      // Fix this to reflect combo - right now just parallel rules
-      let newLoop = this.props.problemFormData.loops[idx]
-      newLoop.resistors[0].resistance = event.target.value
+      //Find the resistor that was changed
+      let changedLoopIndex = 0
+      let changedResistorIndex = 0
+      this.props.problemFormData.loops.forEach(function(loop,index){
+        loop.resistors.forEach(function(resistor, rIndex){
+          if (resistor.num === idx + 1 ){
+            changedLoopIndex = index
+            changedResistorIndex = rIndex
+          }
+        })
+      })
+
+      //Update problem form data to reflect change
+      let changedLoop = this.props.problemFormData.loops[changedLoopIndex]
+      changedLoop.resistors[changedResistorIndex].resistance = event.target.value
 
       nestedProblemFormData = Object.assign({},this.props.problemFormData,{
         loops: [
-          ...this.props.problemFormData.loops.slice(0,idx),
-          newLoop,
-          ...this.props.problemFormData.loops.slice(idx+1)
+          ...this.props.problemFormData.loops.slice(0,changedLoopIndex),
+          changedLoop,
+          ...this.props.problemFormData.loops.slice(changedLoopIndex+1)
         ]
       })
     }

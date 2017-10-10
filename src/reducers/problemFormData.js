@@ -80,7 +80,7 @@ export default (state=initialState, action) => {
 
       let rCount = 1
       for (var k = 0; k < comboLoopArray.length; k++) {
-        comboLoopArray[k].l_resistance = comboLoopArray[k].resistors.reduce((total,resistor)=>{return total += resistor.resistance},0)
+        comboLoopArray[k].l_resistance = comboLoopArray[k].resistors.reduce((total,resistor)=>{return total += parseInt(resistor.resistance,10)},0)
         comboLoopArray[k].l_voltage = action.problemFormData.tot_voltage
         comboLoopArray[k].l_current = (comboLoopArray[k].l_voltage /comboLoopArray[k].l_resistance).toFixed(2)
         for (var r = 0; r < comboLoopArray[k].resistors.length; r++ ){

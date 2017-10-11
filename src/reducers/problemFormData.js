@@ -1,6 +1,7 @@
 
 const initialState = {
   difficulty: 1,
+  likes: 0,
   category: "series",
   tot_voltage: 1,
   tot_resistance: 1,

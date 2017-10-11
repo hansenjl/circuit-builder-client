@@ -1,14 +1,22 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import './Problems.css';
-import { getProblems } from '../actions/problems';
 import Problem from '../components/Problem';
 import NavBar from '../components/NavBar';
+import { getProblems } from '../actions/problems';
+import { addLike } from '../actions/problems';
 
 class Problems extends Component {
 
   componentDidMount(){
     this.props.getProblems()
+  }
+
+   handleClick = (event) => {
+    event.preventDefault()
+    let problem = this.props.problems.find(function(problem){return problem.id == event.target.value})
+    this.props.addLike(problem)
+
   }
 
 
@@ -24,6 +32,7 @@ class Problems extends Component {
                   problem={problem}
                   key={problem.id}
                   />
+                <button value={problem.id} onClick={this.handleClick}>Like</button>
               </div>
             )}
         </div>
@@ -38,4 +47,4 @@ const mapStateToProps = (state) => {
   })
 }
 
-export default connect(mapStateToProps, { getProblems })(Problems);
+export default connect(mapStateToProps, {getProblems, addLike})(Problems);

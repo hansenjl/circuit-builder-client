@@ -7,8 +7,15 @@ export default (state = [], action) => {
       return state.concat(action.problem);
 
     case 'DELETE_PROBLEM_SUCCESS':
-      return state.problems.splice(action.problemId,1)
 
+     return state.filter(problem => problem.id !== action.problemId)
+
+    case 'UPVOTE':
+
+      let idx = state.findIndex((problem) => {return action.problem.id === problem.id})
+      let newState = [...state.slice(0,idx), action.problem, ...state.slice(idx+1,state.length+1)]
+
+      return newState
     default:
       return state;
   }

@@ -11,6 +11,7 @@ class Problems extends Component {
     this.props.getProblems()
   }
 
+
   render(){
     return(
       <div className="Wrapper">
@@ -18,7 +19,7 @@ class Problems extends Component {
         <div className="ProblemsContainer">
           <h3>Choose from existing problems:</h3>
             {this.props.problems.map(problem =>
-              <div key={problem.id}>
+              <div key={problem.id} className="ProblemCard">
                 <Problem
                   problem={problem}
                   key={problem.id}

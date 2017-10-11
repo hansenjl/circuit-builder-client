@@ -11,7 +11,7 @@ import ComboCircuit from '../components/ComboCircuit';
 class ProblemForm extends Component {
 
   componentWillMount(){
-    this.props.resetProblemForm
+    this.props.resetProblemForm()
   }
 
   handleOnChange = event => {

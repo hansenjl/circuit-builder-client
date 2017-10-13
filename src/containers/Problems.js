@@ -42,6 +42,9 @@ class Problems extends Component {
 }
 
 const mapStateToProps = (state) => {
+  state.problems.sort((a,b)=>{
+    return b.likes - a.likes
+  })
   return ({
     problems: state.problems
   })

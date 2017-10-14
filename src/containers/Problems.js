@@ -16,7 +16,6 @@ class Problems extends Component {
     event.preventDefault()
     let problem = this.props.problems.find(function(problem){return problem.id == event.target.value})
     this.props.addLike(problem)
-
   }
 
 
@@ -26,7 +25,7 @@ class Problems extends Component {
         <NavBar/>
         <div className="ProblemsContainer">
           <h3>Choose from existing problems:</h3>
-            {this.props.problems.map(problem =>
+            {this.props.problems.sort((a,b)=>{return b.likes - a.likes}).map(problem =>
               <div key={problem.id} className="ProblemCard">
                 <Problem
                   problem={problem}
@@ -42,9 +41,7 @@ class Problems extends Component {
 }
 
 const mapStateToProps = (state) => {
-  state.problems.sort((a,b)=>{
-    return b.likes - a.likes
-  })
+
   return ({
     problems: state.problems
   })

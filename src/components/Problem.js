@@ -1,40 +1,19 @@
-import React, {Component} from 'react';
+import React from 'react';
 import { Link } from 'react-router-dom'
 
 
-class Problem extends Component{
-  constructor() {
-    super()
-
-    this.state = {
-      like: 0,
-    }
-  }
-
-  handleClick = event => {
-    event.preventDefault()
-
-    this.setState({
-      like: this.state.like + 1
-    })
-  }
+const Problem = ({problem}) => (
+  <Link to={`/problems/${problem.id}`}>
+    <div>
+      <p>Difficulty: {problem.difficulty}</p>
+      <p>Category: {problem.category}</p>
+      <p># of Loops: {problem.loops.length}</p>
+      <label>{problem.likes} likes</label>
+    </div>
+  </Link>
+)
 
 
-  render(){
-
-    return(
-      <Link to={`/problems/${this.props.problem.id}`}>
-        <div>
-          <p>Difficulty: {this.props.problem.difficulty}</p>
-          <p>Category: {this.props.problem.category}</p>
-          <p># of Loops: {this.props.problem.loops.length}</p>
-          <button onClick={this.handleClick}>Like</button>
-          <label>{this.state.like}</label>
-        </div>
-      </Link>
-    )
-  }
-}
 
 
 export default Problem;

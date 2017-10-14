@@ -26,6 +26,14 @@ const removeProblem = problemId => {
   }
 }
 
+const updateLikes = problem => {
+  return{
+    type: 'UPVOTE',
+    problem: problem
+  }
+}
+
+
 // ** Async Actions **
 export const getProblems = () => {
   return dispatch => {
@@ -36,20 +44,27 @@ export const getProblems = () => {
   }
 }
 
-// export const getProblem = (id) => {
-//   return dispatch => {
-//     return fetch(`${API_URL}/problems/${id}`)
-//       .then(response => response.json())
-//       .then(problem => dispatch(setProblem(problem)))
-//       .catch(error => console.log(error))
-//   }
-// }
 
 export const deleteProblem = (id) => {
   return dispatch => {
     return fetch(`${API_URL}/problems/${id}`, {method: 'delete'})
+      .then(dispatch(removeProblem({id})))
+      .catch(error => console.log(error))
+  }
+}
+
+export const addLike = (problem) => {
+  problem.likes += 1
+  return dispatch => {
+    return fetch(`${API_URL}/problems/${problem.id}`, {
+      method: 'PATCH',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({problem:problem})
+    })
       .then(response => response.json())
-      .then(id => dispatch(removeProblem(id)))
+      .then(problem => dispatch(updateLikes(problem)))
       .catch(error => console.log(error))
   }
 }
@@ -57,7 +72,7 @@ export const deleteProblem = (id) => {
 
 export const createProblem = (problem) => {
   problem["loops_attributes"] = problem["loops"]
-  delete problem["loops"];
+  delete problem["loops"]
   for (var i = 0; i < problem["loops_attributes"].length; i++) {
     problem["loops_attributes"][i]["resistors_attributes"] = problem["loops_attributes"][i]["resistors"]
     delete problem["loops_attributes"][i]["resistors"]

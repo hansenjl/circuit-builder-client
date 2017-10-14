@@ -10,10 +10,6 @@ import ComboCircuit from '../components/ComboCircuit';
 
 class ProblemForm extends Component {
 
-  componentWillMount(){
-    this.props.resetProblemForm
-  }
-
   handleOnChange = event => {
     const {name, value} = event.target;
     const currentProblemFormData = Object.assign({}, this.props.problemFormData, {

@@ -76,7 +76,7 @@ class ProblemShow extends Component {
 
 
 const mapStateToProps = (state, ownProps) => {
-
+//get problems if state.problems doesn't exist (component will mount)
   const problem = state.problems.find(problem => problem.id == ownProps.match.params.id)
 
   if (problem) {

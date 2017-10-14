@@ -8,7 +8,7 @@ const Problem = ({problem}) => (
       <p>Difficulty: {problem.difficulty}</p>
       <p>Category: {problem.category}</p>
       <p># of Loops: {problem.loops.length}</p>
-      <label>{problem.likes} likes</label>
+      <p>Likes: {problem.likes} </p>
     </div>
   </Link>
 )

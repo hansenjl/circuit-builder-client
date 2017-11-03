@@ -36,17 +36,16 @@ export default (state=initialState, action) => {
 
       const totCurrent = (action.problemFormData.tot_voltage / totResistance).toFixed(2)
 
-      let resistorArray = Object.assign({},action.problemFormData.loops[0].resistors)
-      // i need this to be an array not an object so object.assign the way it is currently used doesn't work.
+      let resistorArray = Object.assign([...action.problemFormData.loops[0].resistors],{})
 
-      //this is changing initial state!!!!!!
+      //this for loop is changing initial state!!!!!!
       for (var i = 0; i < resistorArray.length; i++) {
         resistorArray[i].num = i + 1
         resistorArray[i].current = totCurrent
         resistorArray[i].voltage = (totCurrent * resistorArray[i].resistance).toFixed(2)
       }
-
       debugger
+
       return Object.assign({},action.problemFormData,{
         tot_current: totCurrent,
         tot_resistance: totResistance,

@@ -87,7 +87,7 @@ class ProblemForm extends Component {
     //save data to db and reset form
     event.preventDefault()
     this.props.createProblem(this.props.problemFormData)
-      .then(this.props.resetProblemForm)
+    //  .then(this.props.resetProblemForm)
   }
 
   handleAddLoop = event => {

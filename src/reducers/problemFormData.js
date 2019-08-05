@@ -1,5 +1,5 @@
 
-var initialState = {
+const initialState = {
   difficulty: 1,
   likes: 0,
   category: "series",
@@ -37,20 +37,27 @@ export default (state=initialState, action) => {
       const totCurrent = (action.problemFormData.tot_voltage / totResistance).toFixed(2)
 
       let resistorArray = Object.assign([...action.problemFormData.loops[0].resistors],{})
+      console.log("before loop")
+     console.log(state.loops[0].resistors[0].voltage)
 
       //this for loop is changing initial state!!!!!!
-      for (var i = 0; i < resistorArray.length; i++) {
-        resistorArray[i].num = i + 1
-        resistorArray[i].current = totCurrent
-        resistorArray[i].voltage = (totCurrent * resistorArray[i].resistance).toFixed(2)
-      }
-      debugger
+      // for (let i = 0; i < resistorArray.length; i++) {
+      //   resistorArray[i].num = i + 1
+      //   resistorArray[i].current = totCurrent
+      //   resistorArray[i].voltage = (totCurrent * resistorArray[i].resistance).toFixed(2)
+
+      // }
+
+      let newResistorArray = resistorArray.map((resistor, index) => {
+        return Object.assign({}, resistor, {num: index+1, current: totCurrent, voltage:(totCurrent * resistor.resistance).toFixed(2)})
+
+      })
 
       return Object.assign({},action.problemFormData,{
         tot_current: totCurrent,
         tot_resistance: totResistance,
         loops: [{
-          resistors: resistorArray
+          resistors: newResistorArray
         }]
       })
 
@@ -96,6 +103,10 @@ export default (state=initialState, action) => {
           rCount += 1
         }
       }
+
+      console.log(initialState.loops[0].resistors[0].voltage)
+      console.log("loop voltage ")
+      console.log(initialState.loops[0].l_voltage)
 
 
       const comboCurrent = comboLoopArray.reduce((totalCurrent,loop)=>{

@@ -15,7 +15,7 @@ class ProblemForm extends Component {
     const currentProblemFormData = Object.assign({}, this.props.problemFormData, {
       [name]: value
     })
-    this.props.updateProblemFormData(currentProblemFormData)
+    this.props.updateProblemFormData({...currentProblemFormData})
   }
 
   handleCategoryChange = event => {
@@ -80,13 +80,13 @@ class ProblemForm extends Component {
         ]
       })
     }
-    this.props.updateProblemFormData(nestedProblemFormData)
+    this.props.updateProblemFormData({...nestedProblemFormData})
   }
 
   handleOnSubmit = event => {
     //save data to db and reset form
     event.preventDefault()
-    this.props.createProblem(this.props.problemFormData)
+    this.props.createProblem({...this.props.problemFormData})
     //  .then(this.props.resetProblemForm)
   }
 

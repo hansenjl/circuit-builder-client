@@ -23,9 +23,6 @@ const initialState = {
   ]
 }
 
-Object.freeze(initialState);
-
-
 
 export default (state=initialState, action) => {
 
@@ -37,8 +34,6 @@ export default (state=initialState, action) => {
       const totCurrent = (action.problemFormData.tot_voltage / totResistance).toFixed(2)
 
       let resistorArray = Object.assign([...action.problemFormData.loops[0].resistors],{})
-      console.log("before loop")
-     console.log(state.loops[0].resistors[0].voltage)
 
       //this for loop is changing initial state!!!!!!
       // for (let i = 0; i < resistorArray.length; i++) {

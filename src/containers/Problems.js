@@ -1,54 +1,64 @@
-import React, { Component } from 'react';
-import { connect } from 'react-redux';
-import './Problems.css';
-import Problem from '../components/Problem';
-import NavBar from '../components/NavBar';
-import { getProblems } from '../actions/problems';
-import { addLike } from '../actions/problems';
+import React, { Component } from "react";
+import { connect } from "react-redux";
+import "./Problems.css";
+import Problem from "../components/Problem";
+import NavBar from "../components/NavBar";
+import { getProblems } from "../actions/problems";
+import { addLike } from "../actions/problems";
 
 class Problems extends Component {
-  constructor(props) {
-    super(props);
 
-    this.state = {
-      currentlyDisplayed: this.props.problems
-    }
-
-    this.onFilterChange = this.onFilterChange.bind(this);
+  state = {
+      filter: "all"
   }
 
-  componentWillMount(){
-    this.props.getProblems()
+  componentDidMount() {
+    this.props.getProblems();
   }
 
-  componentDidMount(){
+  // componentDidMount(){
+  //   this.setState({
+  //     currentlyDisplayed: this.props.problems
+  //   })
+  // }
+
+  onFilterChange = (event) => {
     this.setState({
-      currentlyDisplayed: this.props.problems
-    })
-  }
-
-  onFilterChange(event) {
-    let newlyDisplayed = this.props.problems
-    if (event.target.value !== "all"){
-      newlyDisplayed = this.props.problems.filter( problem => problem.category === event.target.value )
-    }
-
-    this.setState({
-      currentlyDisplayed: newlyDisplayed
+      filter: event.target.value,
     });
   }
 
-   handleClick = (event) => {
-    event.preventDefault()
-    let problem = this.props.problems.find(function(problem){return (problem.id).toString() === event.target.value})
-    this.props.addLike(problem)
-  }
+  handleClick = (event) => {
+    event.preventDefault();
+    let problem = this.props.problems.find(
+      (problem) => problem.id.toString() === event.target.value
+    );
+    this.props.addLike(problem);
+  };
 
+  diplayProblems = () => {
+    let problemsToDisplay = this.props.problems;
 
-  render(){
-    return(
+    if (this.state.filter !== "all") {
+      problemsToDisplay = this.props.problems.filter(
+        (problem) => problem.category === this.state.filter
+      );
+    }
+
+    return problemsToDisplay.map((problem) => (
+      <div key={problem.id} className="ProblemCard">
+        <Problem problem={problem} key={problem.id} />
+        <button value={problem.id} onClick={this.handleClick}>
+          Like
+        </button>
+      </div>
+    ));
+  };
+
+  render() {
+    return (
       <div className="Wrapper">
-        <NavBar/>
+        <NavBar />
         <div className="ProblemsContainer">
           <br></br>
           <div>
@@ -62,26 +72,17 @@ class Problems extends Component {
             </form>
           </div>
           <h3>Choose from existing problems:</h3>
-            {this.state.currentlyDisplayed.sort((a,b)=>{return b.likes - a.likes}).map(problem =>
-              <div key={problem.id} className="ProblemCard">
-                <Problem
-                  problem={problem}
-                  key={problem.id}
-                  />
-                <button value={problem.id} onClick={this.handleClick}>Like</button>
-              </div>
-            )}
+          {this.diplayProblems()}
         </div>
       </div>
-    )
+    );
   }
 }
 
 const mapStateToProps = (state) => {
+  return {
+    problems: state.problems.sort((a, b) => b.likes - a.likes),
+  };
+};
 
-  return ({
-    problems: state.problems
-  })
-}
-
-export default connect(mapStateToProps, {getProblems, addLike})(Problems);
+export default connect(mapStateToProps, { getProblems, addLike })(Problems);

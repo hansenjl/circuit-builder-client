@@ -36,7 +36,7 @@ const updateLikes = problem => {
 
 // ** Async Actions **
 export const getProblems = () => {
-  return dispatch => {
+  return (dispatch) => {
     return fetch(`${API_URL}/problems`)
       .then(response => response.json())
       .then(problems => dispatch(setProblems(problems)))

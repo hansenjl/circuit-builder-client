@@ -22,9 +22,9 @@ export const updateProblemFormData  = problemFormData => {
 export const updateCategory = problemFormData => {
   let resistors = []
   for (var i = 0; i < problemFormData.loops.length; i++) {
-    for (var j = 0; j < problemFormData.loops[i].resistors.length; j++) {
-      resistors.push(problemFormData.loops[i].resistors[j])
-    }
+    // for (var j = 0; j < problemFormData.loops[i].resistors.length; j++) {
+      resistors = [...resistors, ...problemFormData.loops[i].resistors]
+
   }
   switch (problemFormData.category){
     case 'combo':
@@ -66,10 +66,10 @@ export const updateCategory = problemFormData => {
         })
       }
     default:
-      let resistorArray = []
-        for (var b = 0; b < resistors.length; b++) {
-          resistorArray.push(resistors[b])
-        }
+      // let resistorArray =
+        // for (var b = 0; b < resistors.length; b++) {
+        //   resistorArray.push(resistors[b])
+        // }
       return {
         type: 'UPDATED_SERIES_DATA',
         problemFormData: Object.assign({},problemFormData, {
@@ -77,7 +77,7 @@ export const updateCategory = problemFormData => {
             l_current: 1,
             l_voltage: 1,
             l_resistance: 1,
-            resistors: resistorArray
+            resistors: [...resistors]
           }
           ]
         })
